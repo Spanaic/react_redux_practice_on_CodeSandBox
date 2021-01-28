@@ -1,6 +1,8 @@
 import React from "react";
 import { render } from "react-dom";
 
+// class構文
+
 class Human {
   name!: string;
   age!: number;
@@ -13,5 +15,10 @@ class Human {
   }
 }
 
-const yamanaka = new Human("yamanaka", 29);
-console.log(yamanaka);
+const Quill = new Human("Quill", 29);
+console.log(Quill);
+Quill.callName();
+
+const Tanaka = new Human("Tanaka", 40);
+console.log(Tanaka);
+Tanaka.callName();
