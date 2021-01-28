@@ -23,6 +23,7 @@ import { render } from "react-dom";
 // Tanaka.callName();
 
 // 18. React Class Component
+// １９. setStateでstate変更
 
 type HumanProps = {
   age: string;
@@ -42,11 +43,15 @@ class Human extends React.Component<HumanProps> {
   render() {
     return (
       <div>
-        <h2>{this.state.name}</h2>
+        <h2 onClick={this.onButtonClick}>{this.state.name}</h2>
         <h3>{this.props.age}</h3>
       </div>
     );
   }
+
+  onButtonClick = () => {
+    this.setState({ name: this.state.name + "さん" });
+  };
 }
 
 render(<Human age="30" />, document.getElementById("root"));
