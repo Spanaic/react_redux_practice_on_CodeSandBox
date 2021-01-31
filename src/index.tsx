@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import "./styles.css";
 
-// 17. class構文
+// NOTE: 17. class構文
 // class Human {
 //   name!: string;
 //   age!: number;
@@ -23,8 +23,8 @@ import "./styles.css";
 // console.log(Tanaka);
 // Tanaka.callName();
 
-// 18. React Class Component
-// １９. setStateでstate変更
+// NOTE: 18. React Class Component
+// NOTE: １９. setStateでstate変更
 // type HumanProps = {
 //   age: string;
 // };
@@ -56,63 +56,134 @@ import "./styles.css";
 
 // render(<Human age="30" />, document.getElementById("root"));
 
-// 20. H2O Component
-type H2OProps = {};
+// NOTE: 20. H2O Component
+// type H2OProps = {};
 
-class H2O extends React.Component {
-  state: {
-    temp: number;
-  };
-  constructor(props: H2OProps) {
-    super(props);
-    this.state = { temp: 15 };
-  }
+// class H2O extends React.Component {
+//   state: {
+//     temp: number;
+//   };
+//   constructor(props: H2OProps) {
+//     super(props);
+//     this.state = { temp: 15 };
+//   }
 
-  H2OState(temp: number): string {
-    if (temp <= 0) {
-      return "ice";
-    }
+//   H2OState(temp: number): string {
+//     if (temp <= 0) {
+//       return "ice";
+//     }
 
-    if (100 <= temp) {
-      return "steam";
-    }
+//     if (100 <= temp) {
+//       return "steam";
+//     }
 
-    return "water";
-  }
+//     return "water";
+//   }
 
-  render() {
-    const { temp } = this.state;
+//   render() {
+//     const { temp } = this.state;
 
+//     return (
+//       // 動的にクラスネームが変わる状態。対応したCSSを記述していく
+//       <div className={this.H2OState(temp)}>
+//         <h2>
+//           pahase: {this.H2OState(temp)}, {temp}度
+//         </h2>
+//         <button onClick={this.onPlusClick}>+</button>
+//         <button onClick={this.onPlus10Click}>+10</button>
+//         <button onClick={this.onMinusClick}>-</button>
+//         <button onClick={this.onMinus10Click}>-10</button>
+//       </div>
+//     );
+//   }
+
+//   onPlusClick = () => {
+//     const { temp } = this.state;
+//     this.setState({ temp: temp + 1 });
+//   };
+//   onPlus10Click = () => {
+//     const { temp } = this.state;
+//     this.setState({ temp: temp + 10 });
+//   };
+//   onMinusClick = () => {
+//     const { temp } = this.state;
+//     this.setState({ temp: temp - 1 });
+//   };
+//   onMinus10Click = () => {
+//     const { temp } = this.state;
+//     this.setState({ temp: temp - 10 });
+//   };
+// }
+
+// render(<H2O />, document.getElementById("root"));
+
+// NOTE: 24. map
+// NOTE: 25. filter
+// const array1 = [0, 1, 2, 3, 4];
+
+// const newArray1 = array1.map((output, index) => {
+//   return `${index}番目は${output}です。`;
+// });
+
+// console.log(newArray1);
+
+// const array2 = ["tanaka", "sasaki", "ueno", "kobayakawa", "chou"];
+
+// const newArray2 = array2.map((output, index) => {
+//   return `${index}番目は${output}さんです。`;
+// });
+
+// console.log(newArray2);
+
+// const array3 = [1, 2, 3, 4, 5];
+// const newArray3 = array3.filter((output, index) => {
+//   return output > 3;
+// });
+
+// console.log(newArray3);
+
+// const newArray4 = array2.filter((output, index) => {
+//   return output === "sasaki";
+// });
+
+// console.log(newArray4);
+
+// const newArray5 = array2.filter((output, index) => {
+//   return output.length > 7;
+// });
+
+// console.log(newArray5);
+
+// 26. mapとfilterの実装
+type Todo = {
+  id: number;
+  title: string;
+};
+
+const todos = [
+  { id: 1, title: "title1" },
+  { id: 2, title: "title2" },
+  { id: 3, title: "title3" },
+  { id: 4, title: "title4" }
+];
+
+const deleteTargetId = 4;
+
+const deletedArray: Todo[] = todos.filter((todo) => todo.id !== deleteTargetId);
+
+console.log(deletedArray);
+
+// FIXME: mapメソッドが使えないエラーを解決する
+const Todos: Todo[] = (todos: Todo[]) => {
+  const list = todos.map((todo: Todo) => {
     return (
-      // 動的にクラスネームが変わる状態。対応したCSSを記述していく
-      <div className={this.H2OState(temp)}>
-        <h2>
-          pahase: {this.H2OState(temp)}, {temp}度
-        </h2>
-        <button onClick={this.onPlusClick}>+</button>
-        <button onClick={this.onPlus10Click}>+10</button>
-        <button onClick={this.onMinusClick}>-</button>
-        <button onClick={this.onMinus10Click}>-10</button>
-      </div>
+      <li>
+        {todo.id} {todo.title}
+      </li>
     );
-  }
+  });
 
-  onPlusClick = () => {
-    const { temp } = this.state;
-    this.setState({ temp: temp + 1 });
-  };
-  onPlus10Click = () => {
-    const { temp } = this.state;
-    this.setState({ temp: temp + 10 });
-  };
-  onMinusClick = () => {
-    const { temp } = this.state;
-    this.setState({ temp: temp - 1 });
-  };
-  onMinus10Click = () => {
-    const { temp } = this.state;
-    this.setState({ temp: temp - 10 });
-  };
-}
+  return <ul>{list}</ul>;
+};
 
-render(<H2O />, document.getElementById("root"));
+render(<Todos todos={todos} />, document.getElementById("root"));
