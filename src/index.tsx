@@ -173,11 +173,11 @@ const deletedArray: Todo[] = todos.filter((todo) => todo.id !== deleteTargetId);
 
 console.log(deletedArray);
 
-// FIXME: mapメソッドが使えないエラーを解決する
-const Todos: Todo[] = (todos: Todo[]) => {
-  const list = todos.map((todo: Todo) => {
+// FIXME: todos.todosの謎を解明する
+const Todos = (todos: Todo[]) => {
+  const list = todos.todos.map((todo: Todo) => {
     return (
-      <li>
+      <li key={todo.id}>
         {todo.id} {todo.title}
       </li>
     );
