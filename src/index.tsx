@@ -1,6 +1,7 @@
-import React from "react";
-import { render } from "react-dom";
-import "./styles.css";
+// import React from "react";
+// import { render } from "react-dom";
+// import "./styles.css";
+import { createStore } from "redux";
 
 // NOTE: 17. class構文
 // class Human {
@@ -154,36 +155,69 @@ import "./styles.css";
 
 // console.log(newArray5);
 
-// 26. mapとfilterの実装
-type Todo = {
-  id: number;
-  title: string;
+// NOTE: 26. mapとfilterの実装
+// type Todo = {
+//   id: number;
+//   title: string;
+// };
+
+// const todos = [
+//   { id: 1, title: "title1" },
+//   { id: 2, title: "title2" },
+//   { id: 3, title: "title3" },
+//   { id: 4, title: "title4" }
+// ];
+
+// const deleteTargetId = 4;
+
+// const deletedArray: Todo[] = todos.filter((todo) => todo.id !== deleteTargetId);
+
+// console.log(deletedArray);
+
+// // FIXME: todos.todosの謎を解明する
+// const Todos = (todos: Todo[]) => {
+//   const list = todos.todos.map((todo: Todo) => {
+//     return (
+//       <li key={todo.id}>
+//         {todo.id} {todo.title}
+//       </li>
+//     );
+//   });
+
+//   return <ul>{list}</ul>;
+// };
+
+// render(<Todos todos={todos} />, document.getElementById("root"));
+
+// NOTE: セクション8 50.createStoreから
+
+type reducerAction = {
+  type: string;
 };
 
-const todos = [
-  { id: 1, title: "title1" },
-  { id: 2, title: "title2" },
-  { id: 3, title: "title3" },
-  { id: 4, title: "title4" }
-];
+const reducer = (state = 0, action: reducerAction) => {
+  switch (action.type) {
+    case "PLUS_ONE":
+      return state + 1;
 
-const deleteTargetId = 4;
+    case "MINUS_ONE":
+      return state - 1;
 
-const deletedArray: Todo[] = todos.filter((todo) => todo.id !== deleteTargetId);
-
-console.log(deletedArray);
-
-// FIXME: todos.todosの謎を解明する
-const Todos = (todos: Todo[]) => {
-  const list = todos.todos.map((todo: Todo) => {
-    return (
-      <li key={todo.id}>
-        {todo.id} {todo.title}
-      </li>
-    );
-  });
-
-  return <ul>{list}</ul>;
+    default:
+      return state;
+  }
 };
 
-render(<Todos todos={todos} />, document.getElementById("root"));
+const store = createStore(reducer);
+
+console.log(store);
+console.log(reducer);
+
+// subscribeはstateの値に変更があれば関数を実行する。
+store.subscribe(() => {
+  console.log(store.getState());
+});
+
+store.dispatch({ type: "PLUS_ONE" });
+store.dispatch({ type: "PLUS_ONE" });
+store.dispatch({ type: "MINUS_ONE" });
