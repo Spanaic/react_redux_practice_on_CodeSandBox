@@ -1,8 +1,10 @@
-// import React from "react";
-// import { render } from "react-dom";
-// import "./styles.css";
+import React from "react";
+import { render } from "react-dom";
+import "./styles.css";
 import { createStore } from "redux";
 import reducer from "./reducer";
+import { Provider } from "react-redux";
+import App from "./App";
 
 // NOTE: 17. class構文
 // class Human {
@@ -201,5 +203,9 @@ store.subscribe(() => {
   console.log(store.getState());
 });
 
-store.dispatch({ type: "PLUS", payload: { num: 1 } });
-store.dispatch({ type: "MINUS", payload: { num: 10 } });
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
