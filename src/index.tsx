@@ -2,6 +2,7 @@
 // import { render } from "react-dom";
 // import "./styles.css";
 import { createStore } from "redux";
+import reducer from "./reducer";
 
 // NOTE: 17. class構文
 // class Human {
@@ -190,24 +191,6 @@ import { createStore } from "redux";
 // render(<Todos todos={todos} />, document.getElementById("root"));
 
 // NOTE: セクション8 50.createStoreから
-
-type reducerAction = {
-  type: string;
-};
-
-const reducer = (state = 0, action: reducerAction) => {
-  switch (action.type) {
-    case "PLUS_ONE":
-      return state + 1;
-
-    case "MINUS_ONE":
-      return state - 1;
-
-    default:
-      return state;
-  }
-};
-
 const store = createStore(reducer);
 
 console.log(store);
@@ -218,6 +201,5 @@ store.subscribe(() => {
   console.log(store.getState());
 });
 
-store.dispatch({ type: "PLUS_ONE" });
-store.dispatch({ type: "PLUS_ONE" });
-store.dispatch({ type: "MINUS_ONE" });
+store.dispatch({ type: "PLUS", payload: { num: 1 } });
+store.dispatch({ type: "MINUS", payload: { num: 10 } });
