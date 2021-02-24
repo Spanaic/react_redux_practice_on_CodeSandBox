@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import "./styles.css";
 import { createStore } from "redux";
-import reducer from "./reducer";
+import rootReducer from "./reducers";
 import { Provider } from "react-redux";
 // ロジックを切り出したcontainersのAppを使っていく
 // import App from "./App";
@@ -195,10 +195,7 @@ import App from "./containers/App";
 // render(<Todos todos={todos} />, document.getElementById("root"));
 
 // NOTE: セクション8 50.createStoreから
-const store = createStore(reducer);
-
-console.log(store);
-console.log(reducer);
+const store = createStore(rootReducer);
 
 // subscribeはstateの値に変更があれば関数を実行する。
 store.subscribe(() => {

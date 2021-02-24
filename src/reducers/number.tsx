@@ -1,13 +1,13 @@
 // reducerを切り出す
 
-type reducerAction = {
+type NumberAction = {
   type: string;
   payload: {
     num: number;
   };
 };
 
-const reducer = (state = 0, action: reducerAction) => {
+const number = (state = 0, action: NumberAction) => {
   switch (action.type) {
     case "PLUS":
       return state + action.payload.num;
@@ -20,4 +20,4 @@ const reducer = (state = 0, action: reducerAction) => {
   }
 };
 
-export default reducer;
+export default number;
