@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import App from "../components/App";
+import { plus, minus } from "../actions";
 
 type MapStateToProps = {
   number: number;
@@ -26,16 +27,10 @@ const mapStateToProps = (state: MapStateToProps) => {
 const mapDispatchToProps = (dispatch: DispatchProps): MapDispatchToProps => {
   return {
     plus: (num) => {
-      dispatch({
-        type: "PLUS",
-        payload: { num: num }
-      });
+      dispatch(plus(num));
     },
     minus: (num) => {
-      dispatch({
-        type: "MINUS",
-        payload: { num: num }
-      });
+      dispatch(minus(num));
     }
   };
 };
