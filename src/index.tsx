@@ -1,12 +1,14 @@
 import React from "react";
 import { render } from "react-dom";
 import "./styles.css";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./reducers";
 import { Provider } from "react-redux";
 // ロジックを切り出したcontainersのAppを使っていく
 // import App from "./App";
 import App from "./containers/App";
+// 非同期処理のmiddlewareを利用する
+import thunk from "redux-thunk";
 
 // NOTE: 17. class構文
 // class Human {
@@ -195,7 +197,9 @@ import App from "./containers/App";
 // render(<Todos todos={todos} />, document.getElementById("root"));
 
 // NOTE: セクション8 50.createStoreから
-const store = createStore(rootReducer);
+const middlewares = [thunk];
+// applyMiddlewareを第二引数として渡す
+const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 // subscribeはstateの値に変更があれば関数を実行する。
 store.subscribe(() => {

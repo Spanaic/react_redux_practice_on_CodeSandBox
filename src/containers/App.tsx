@@ -1,9 +1,11 @@
 import { connect } from "react-redux";
 import App from "../components/App";
-import { plus, minus } from "../actions";
+import { plus, minus, asyncMinus } from "../actions";
 
 type MapStateToProps = {
   number: number;
+  title: string;
+  day: string;
 };
 
 type DispatchProps = {
@@ -14,11 +16,15 @@ type DispatchProps = {
 type MapDispatchToProps = {
   plus: (dispatch: DispatchProps) => void;
   minus: (dispatch: DispatchProps) => void;
+  asyncMinus: (dispatch: DispatchProps) => void;
 };
 
 const mapStateToProps = (state: MapStateToProps) => {
   return {
-    number: state
+    // reducersでstateが分離したので、state.numberでアクセスする
+    number: state.number,
+    title: state.title,
+    day: state.day
   };
 };
 
@@ -31,6 +37,9 @@ const mapDispatchToProps = (dispatch: DispatchProps): MapDispatchToProps => {
     },
     minus: (num) => {
       dispatch(minus(num));
+    },
+    asyncMinus: (num) => {
+      dispatch(asyncMinus(num));
     }
   };
 };
