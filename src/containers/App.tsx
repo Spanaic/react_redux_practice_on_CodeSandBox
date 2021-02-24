@@ -1,5 +1,5 @@
-import React from "react";
 import { connect } from "react-redux";
+import App from "../components/App";
 
 type MapStateToProps = {
   number: number;
@@ -15,33 +15,14 @@ type MapDispatchToProps = {
   minus: (dispatch: DispatchProps) => void;
 };
 
-// anyの型がいくつかある
-const App = ({ number, plus, minus }) => (
-  <div>
-    <h2>App {number}</h2>
-    <button
-      onClick={() => {
-        plus(10);
-      }}
-    >
-      + 10
-    </button>
-    <button
-      onClick={() => {
-        minus(10);
-      }}
-    >
-      - 10
-    </button>
-  </div>
-);
-
 const mapStateToProps = (state: MapStateToProps) => {
   return {
     number: state
   };
 };
 
+// NOTE: Container Component
+//  ロジックに関する下の部分をcontainersディレクトリに切り出す
 const mapDispatchToProps = (dispatch: DispatchProps): MapDispatchToProps => {
   return {
     plus: (num) => {

@@ -4,7 +4,9 @@ import "./styles.css";
 import { createStore } from "redux";
 import reducer from "./reducer";
 import { Provider } from "react-redux";
-import App from "./App";
+// ロジックを切り出したcontainersのAppを使っていく
+// import App from "./App";
+import App from "./containers/App";
 
 // NOTE: 17. class構文
 // class Human {
