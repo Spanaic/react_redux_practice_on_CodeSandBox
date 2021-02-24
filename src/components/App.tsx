@@ -2,7 +2,7 @@ import React from "react";
 
 // FIXME: anyの型がいくつかある
 // NOTE: Presentational Component
-const App = ({ number, day, title, plus, minus, asyncMinus }) => (
+const App = ({ number, day, title, plus, minus, asyncMinus, getJson }) => (
   <div>
     <h2>
       {title} {number} {day}
@@ -27,6 +27,13 @@ const App = ({ number, day, title, plus, minus, asyncMinus }) => (
       }}
     >
       async - 10
+    </button>
+    <button
+      onClick={() => {
+        getJson();
+      }}
+    >
+      getJson
     </button>
   </div>
 );
